@@ -1,11 +1,17 @@
 package org.example.concurrence;
 
+
+// java 多线程情况， while if 区别
+
+/*
+* 1.多线程情况下，如果
+*
+* */
+
 public class GoDown {
 
     public static final int max_size = 100;
     public int curr_num;
-
-    GoDown() {}
 
     public GoDown(int curr_num) {
         this.curr_num = curr_num;
@@ -13,7 +19,7 @@ public class GoDown {
 
     public synchronized void produce(int need_num) {
         while (need_num + curr_num > max_size) {
-            System.out.println("暂时不生成");
+            System.out.println(Thread.currentThread().getName() +  "暂时不生成");
             try {
                 wait();
             } catch (InterruptedException exception) {
@@ -22,7 +28,7 @@ public class GoDown {
         }
 
         curr_num += need_num;
-        System.out.println("已经生成 " +  need_num  + " 个产品 现在仓储量为" + curr_num);
+        System.out.println(Thread.currentThread().getName() + "已经生成 " +  need_num  + " 个产品 现在仓储量为" + curr_num);
         notifyAll();
     }
 
@@ -36,7 +42,7 @@ public class GoDown {
         }
 
         curr_num -= need_num;
-        System.out.println("已经消费了" + need_num + " 个产品 现仓储量为" + curr_num);
+        System.out.println(Thread.currentThread().getName() +  "已经消费了" + need_num + " 个产品 现仓储量为" + curr_num);
         notifyAll();
     }
 
