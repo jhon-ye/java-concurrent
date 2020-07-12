@@ -2,7 +2,8 @@ package org.example.concurrent.test;
 
 public class Singleton {
 
-    private static Singleton INSTANCE = null;
+    //DCL DOUBLE CHECK
+    private static volatile Singleton INSTANCE = null;
     //double check
     public static Singleton getInstance() {
         if (INSTANCE == null) {
